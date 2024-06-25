@@ -4,65 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro</title>
+    <title>Cadastro de Livros</title>
 
     <style>
-        body{
+        body {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: rgb(235, 235, 235);
+            background-color: #f0f0f0; 
+            font-family: Arial, sans-serif; 
         }
 
-        /* aaaa */
-        form{
-            background-color: rgb(255, 96, 96);
+        form {
+            background-color: #4CAF50; 
             color: white;
             width: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
             padding: 20px;
-            border-radius: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); 
         }
 
-        form > button{
-            margin-top: 20px;
-            width: 200px;
+        form > div {
+            margin-bottom: 10px;
+        }
+
+        form input[type="text"],
+        form input[type="number"] {
+            width: calc(100% - 20px); 
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.1); 
+            font-size: 16px;
+        }
+
+        form > button {
+            width: 100%;
             height: 40px;
-            background: white;
-            color: black;
+            background-color: #fff; 
+            color: #4CAF50; 
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
+        form > button:hover {
+            background-color: #e0e0e0; 
+        }
+
+        .error-message {
+            color: red; 
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
-    
-    @if ($errors)
-        @foreach ($errors->all() as $erros)
-            <p>{{ $erros }}</p>
-        @endforeach
-    @endif
+    <div style="text-align: center; margin-bottom: 20px;">
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <p class="error-message">{{ $error }}</p>
+            @endforeach
+        @endif
+    </div>
+
     <form action="/cadastro" method="post">
         @csrf
 
         <div>
             <p>Autor</p>
-            <input type="text" name="autor">
+            <input type="text" name="autor" required>
         </div>
 
         <div>
-            <p>Titulo</p>
-            <input type="text" name="titulo">
+            <p>Título</p>
+            <input type="text" name="titulo" required>
         </div>
 
         <div>
-            <p>Subtitulo</p>
+            <p>Subtítulo</p>
             <input type="text" name="subtitulo">
         </div>
 
